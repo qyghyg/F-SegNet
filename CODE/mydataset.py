@@ -119,9 +119,7 @@ class myDataset(data.Dataset):
         img_x, img_y = self.flip(img_x, img_y)
         # img_x, img_y = self.randomResizeCrop(img_x, img_y)
         # img_x, img_y = self.centerCrop(img_x, img_y)
-        # img_x, img_y = self.adjustSaturation(img_x, img_y)
         # img_x, img_y = self.adjustContrast(img_x, img_y)
-        # img_x, img_y = self.adjustBrightness(img_x, img_y)
         if self.transform is not None:
             img_x = self.transform(img_x)
         if self.target_transform == False:
