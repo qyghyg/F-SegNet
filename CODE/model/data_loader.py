@@ -191,7 +191,6 @@ class SegmentationDataset(Dataset):
 
 
 if __name__ == "__main__":
-    data_root = "data"
     
     try:
         train_loader, val_loader, test_loader = create_dataloaders(
