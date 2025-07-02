@@ -49,38 +49,6 @@ class BinarySegmentationMetrics:
         self.total_tn += tn
         self.total_fn += fn
         self.total_pixels += len(pred_flat)
-    
-    def compute(self) -> Dict[str, float]:
-
-        tp, fp, tn, fn = self.total_tp, self.total_fp, self.total_tn, self.total_fn
-        
-        overall_acc = (tp + tn) / max(tp + tn + fp + fn, 1)
-        
-        iou_fg = tp / max(tp + fp + fn, 1)
-        iou_bg = tn / max(tn + fp + fn, 1)
-        
-        mIoU = (iou_fg + iou_bg) / 2 
-        acc_fg = tp / max(tp + fn, 1)   
-        acc_bg = tn / max(tn + fp, 1) 
-        mAcc = (acc_fg + acc_bg) / 2
-        dice_fg = 2 * tp / max(2 * tp + fp + fn, 1)
-        dice_bg = 2 * tn / max(2 * tn + fp + fn, 1)
-        mDice = (dice_fg + dice_bg) / 2
-        precision = tp / max(tp + fp, 1)
-        recall = tp / max(tp + fn, 1)
-        
-        return {
-            'overall_acc': float(overall_acc),
-            'mIoU': float(mIoU),
-            'mAcc': float(mAcc), 
-            'mDice': float(mDice),
-            'precision': float(precision),
-            'recall': float(recall),
-            'iou_fg': float(iou_fg),
-            'iou_bg': float(iou_bg),
-            'dice_fg': float(dice_fg),
-            'dice_bg': float(dice_bg)
-        }
 
 class SegFormerTrainer:
     def __init__(self, 
@@ -212,8 +180,6 @@ class SegFormerTrainer:
             f"mIoU: {metrics['mIoU']:.4f}, "
             f"mAcc: {metrics['mAcc']:.4f}, "
             f"mDice: {metrics['mDice']:.4f}, "
-            f"Precision: {metrics['precision']:.4f}, "
-            f"Recall: {metrics['recall']:.4f}"
         )
         
         self.training_history['val_loss'].append(metrics['val_loss'])
