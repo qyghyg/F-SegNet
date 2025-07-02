@@ -288,22 +288,15 @@ def create_segformer_b5(img_size: int = 1000) -> SegFormer:
 
 
 if __name__ == "__main__":
-
-    model = create_segformer_b5(img_size=1000)
-    x = torch.randn(1, 3, 1000, 1000)
+    
     output = model(x)
     print(f"Input shape: {x.shape}")
-    print(f"Output shape: {output.shape}")
-    print(f"Output range: [{output.min():.3f}, {output.max():.3f}]")
-
+    
     total_params = sum(p.numel() for p in model.parameters())
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    
     print(f"Total parameters: {total_params:,}")
     print(f"Trainable parameters: {trainable_params:,}")
-    
-    print(f"\nMemory considerations for 1000x1000 images:")
-    print(f"- Input tensor size: ~12 MB per image (3 channels * 1000 * 1000 * 4 bytes)")
-    print(f"- Output tensor size: ~4 MB per image (1 channel * 1000 * 1000 * 4 bytes)")
     print(f"- Recommended batch size: 4 (as per paper, but may need GPU with >16GB memory)")
     print(f"- Consider gradient accumulation for smaller GPUs")
     
