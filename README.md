@@ -1,5 +1,5 @@
 # F-SegNet-Identification
-This project uses deep learning to detect fractures in hard rock
+This project contains the core implementation code for detecting fractures in hard rock using deep learning.
 
 ## Related Publications
 
