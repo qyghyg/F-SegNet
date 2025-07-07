@@ -198,9 +198,7 @@ class SegFormerTrainer:
             'optimizer_state_dict': self.optimizer.state_dict(),
             'scheduler_state_dict': self.scheduler.state_dict(),
             'current_iter': self.current_iter,
-            'best_miou': self.best_miou,
-            'config': self.config,
-            'training_history': self.training_history
+            'config': self.config
         }, latest_path)
         
         if current_miou > self.best_miou:
@@ -252,7 +250,6 @@ def main():
     config = {
         'data_root': 'data',
         'img_size': 1000,
-        'batch_size': 4,
         'num_workers': 4,
         'max_iters': 60000,  
         'val_interval': 500,
@@ -285,8 +282,6 @@ def main():
     except Exception as e:
         print(f"Error creating dataloaders: {e}")
         return
-    
-    model = create_segformer_b5(img_size=config['img_size'])
     
     total_params = sum(p.numel() for p in model.parameters())
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
