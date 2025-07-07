@@ -21,35 +21,6 @@ import warnings
 warnings.filterwarnings('ignore')
 from sklearn.metrics import confusion_matrix
 
-class BinarySegmentationMetrics:
-    def __init__(self, threshold: float = 0.5):
-        self.threshold = threshold
-        self.reset()
-    
-    def reset(self):
-        self.total_tp = 0
-        self.total_fp = 0
-        self.total_tn = 0
-        self.total_fn = 0
-        self.total_pixels = 0
-    
-    def update(self, pred: torch.Tensor, target: torch.Tensor):
-        pred_binary = (pred > self.threshold).float()
-        
-        pred_flat = pred_binary.cpu().numpy().flatten()
-        target_flat = target.cpu().numpy().flatten()
-        
-        tp = ((pred_flat == 1) & (target_flat == 1)).sum()
-        fp = ((pred_flat == 1) & (target_flat == 0)).sum()
-        tn = ((pred_flat == 0) & (target_flat == 0)).sum()
-        fn = ((pred_flat == 0) & (target_flat == 1)).sum()
-        
-        self.total_tp += tp
-        self.total_fp += fp
-        self.total_tn += tn
-        self.total_fn += fn
-        self.total_pixels += len(pred_flat)
-
 class SegFormerTrainer:
     def __init__(self, 
                  model: SegFormer,
