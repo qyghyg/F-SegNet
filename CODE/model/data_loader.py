@@ -189,7 +189,6 @@ class ROCK_Dataset(Dataset):
             'mask_path': mask_path
         }
 
-
 if __name__ == "__main__":
     
     try:
