@@ -11,7 +11,7 @@ import glob
 from pathlib import Path
 import random
 
-class SegmentationDataset(Dataset):
+class ROCK_Dataset(Dataset):
     def __init__(self, 
                  data_root: str,
                  img_dir: str, 
