@@ -299,13 +299,3 @@ if __name__ == "__main__":
     print(f"Trainable parameters: {trainable_params:,}")
     print(f"- Recommended batch size: 4 (as per paper, but may need GPU with >16GB memory)")
     print(f"- Consider gradient accumulation for smaller GPUs")
-    
-    try:
-        x_batch = torch.randn(4, 3, 1000, 1000)
-        output_batch = model(x_batch)
-        print(f"\nBatch test successful:")
-        print(f"Batch input shape: {x_batch.shape}")
-        print(f"Batch output shape: {output_batch.shape}")
-    except RuntimeError as e:
-        print(f"\nBatch size 4 failed (likely due to memory): {e}")
-        print("Consider reducing batch size or using gradient accumulation")
