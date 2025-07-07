@@ -1,4 +1,4 @@
-## Pseudocode for density/intensity analysis
+## Pseudocode for parameters analysis
 
 Innovations: The CSWM integrates spatial sampling, geometric intersection calculation, and statistical normalization. During computation, a combination of endpoint detection and area-based weighting is utilized.
 
