@@ -13,7 +13,7 @@ Density computation: endpoint-based analysis
 
 Intensity computation: intersection-based analysis
 6. Intersection calculation: Count line-circle boundary crossings//Apply analytical geometry intersection algorithm.
-7. Perimeter normalization: Divide intersection count by effective circle perimeter//Use standardized perimeter formula.
+7. Perimeter normalization: Divide intersection count by effective circle perimeter.
 
 Matrix assembly: Spatial result organization
 8. Density mapping: Store values in spatial grid.
