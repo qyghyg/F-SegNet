@@ -22,4 +22,3 @@ Matrix assembly: Spatial result organization
 ---
 
 Note: The spatial sampling and intersection algorithms follow established computational geometry principles.
-Loss: Boundary effects and finite sampling resolution constraints.
