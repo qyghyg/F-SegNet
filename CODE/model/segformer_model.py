@@ -68,7 +68,7 @@ class Attention(nn.Module):
         if sr_ratio > 1:
             self.sr = nn.Conv2d(dim, dim, kernel_size=sr_ratio, stride=sr_ratio)
             self.norm = nn.LayerNorm(dim)
-
+    
     def forward(self, x, H: int, W: int):
         B, N, C = x.shape
         q = self.q(x).reshape(B, N, self.num_heads, C // self.num_heads).permute(0, 2, 1, 3)
@@ -91,6 +91,17 @@ class Attention(nn.Module):
         x = self.proj_drop(x)
 
         return x
+
+def create_segformer_b5(img_size: int = 1000) -> SegFormer:
+    return SegFormer(
+        img_size=img_size,
+        embed_dims=[64, 128, 320, 512],
+        num_heads=[1, 2, 5, 8], 
+        depths=[3, 6, 40, 3],
+        sr_ratios=[8, 4, 2, 1],
+        drop_path_rate=0.1,
+        decoder_channels=256
+    )
 
 class Block(nn.Module):
     
@@ -274,17 +285,6 @@ class SegFormer(nn.Module):
         seg_probs = seg_probs.squeeze(1)
         
         return seg_probs
-
-def create_segformer_b5(img_size: int = 1000) -> SegFormer:
-    return SegFormer(
-        img_size=img_size,
-        embed_dims=[64, 128, 320, 512],
-        num_heads=[1, 2, 5, 8], 
-        depths=[3, 6, 40, 3],
-        sr_ratios=[8, 4, 2, 1],
-        drop_path_rate=0.1,
-        decoder_channels=256
-    )
 
 
 if __name__ == "__main__":
